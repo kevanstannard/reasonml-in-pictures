@@ -53,7 +53,6 @@ Post.(fmap(getPostTitle, findPost(1)));
 Post.(getPostTitle <$> findPost(1));
 
 module Function = {
-  type t('a, 'b) = 'a => 'b;
   let fmap = (f, g, x) => f(g(x));
 };
 
@@ -64,8 +63,10 @@ Maybe.(Just((+)(3)) <*> Just(2)) == Just(5);
 
 module MyList = {
   type apply('a, 'b) = (list('a => 'b), list('a)) => list('b);
+
   let apply: apply('a, 'b) =
     (fs, xs) => List.flatten(List.map(f => List.map(f, xs), fs));
+
   let (<*>) = apply;
 };
 
@@ -75,8 +76,9 @@ Maybe.((+) <$> Just(5));
 
 /*
  Maybe.(Just((+)(5)) <$> Just(5));
- // Error
- */
+
+  // Error
+  */
 
 Maybe.(Just((+)(5)) <*> Just(5));
 
@@ -111,6 +113,8 @@ let half = x =>
   };
 
 Maybe.(Just(3) >>= half);
+Maybe.(Just(4) >>= half);
+Maybe.(Nothing >>= half);
 
 Maybe.(Just(20) >>= half >>= half >>= half);
 

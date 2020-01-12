@@ -173,6 +173,8 @@ function half(x) {
 
 half(3);
 
+half(4);
+
 bind(bind(half(20), half), half);
 
 var $$Error = Caml_exceptions.create("Index-ReasonmlInPictures.IO.Error");
